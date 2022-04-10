@@ -42,18 +42,18 @@ const Form = () => {
     const plusDays = day * 24;
     const plusHours = actualHour + Number(hour) + plusDays;
     for (let i = 0; i <= plusHours; i++) {
-      d.setHours(d.getHours() + 1);
+      if (d.getDay() === 6) {
+        let dif = 48 - d.getHours() + 9;
+        d.setHours(dif);
+      }
+      if (d.getDay() === 0) {
+        let dif = 24 - d.getHours() + 9;
+        d.setHours(dif);
+      }
       if (d.getHours === 17) {
         d.setHours(d.getHours + 16);
       }
-      if (d.getDay() === 6) {
-        let dif = 24 - d.getHours() + 10;
-        d.setHours(48 + dif);
-      }
-      if (d.getDay() === 0) {
-        let dif = 24 - d.getHours() + 10;
-        d.setHours(24 + dif);
-      }
+      d.setHours(d.getHours() + 1);
     }
     setResultTime(d.toLocaleTimeString());
     setResultDate(d.toLocaleDateString());
